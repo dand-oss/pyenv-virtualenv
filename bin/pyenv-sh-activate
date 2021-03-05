@@ -258,3 +258,7 @@ if [ -d "${prefix}/conda-meta" ] ||
   esac
   shopt -u nullglob
 fi
+
+if [ -f "${prefix}/bin/postactivate" ] ; then
+    cat "${prefix}/bin/postactivate"
+fi
