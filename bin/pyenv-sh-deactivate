@@ -191,3 +191,7 @@ fi;
 EOS
   ;;
 esac
+
+if [ -f "${prefix}/bin/postdeactivate" ] ; then
+    cat "${prefix}/bin/postdeactivate"
+fi
