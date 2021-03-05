@@ -226,3 +226,7 @@ esac
 
 # Execute `after_deactivate` hooks.
 for hook in "${after_hooks[@]}"; do eval "$hook"; done
+
+if [ -f "${prefix}/bin/postdeactivate" ] ; then
+    cat "${prefix}/bin/postdeactivate"
+fi

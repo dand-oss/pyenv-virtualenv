@@ -303,3 +303,7 @@ fi
 
 # Execute `after_activate` hooks.
 for hook in "${after_hooks[@]}"; do eval "$hook"; done
+
+if [ -f "${prefix}/bin/postactivate" ] ; then
+    cat "${prefix}/bin/postactivate"
+fi
