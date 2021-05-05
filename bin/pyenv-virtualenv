@@ -579,6 +579,27 @@ else
   else
     pyenv-exec virtualenv $QUIET $VERBOSE "${VIRTUALENV_OPTIONS[@]}" "${VIRTUALENV_PATH}" || STATUS="$?"
   fi
+  declare -r scriptdir="${VIRTUALENV_PATH}/Scripts"
+  echo "scriptdir=${scriptdir}"
+  if [ -d "${scriptdir}" ] ; then
+      echo "scriptdir is dir"
+
+      # link to debug exes/dlls - skipped by virtualenv
+      declare -r basedir="${PYENV_ROOT}/versions/${PYENV_VERSION}/Scripts"
+      echo "basedir=${basedir}"
+      ln -s ${base}/*.dll ${basedir}/*.exe "${scriptdir}" 2>/dev/null || true
+
+      # link scripts to bin
+      declare -r bindir="${VIRTUALENV_PATH}/bin"
+      echo "bindir=${bindir}"
+      if [ -d "${bindir}" ] ; then
+          echo "ln -s "${scriptdir}/*" "${bindir}""
+          ln -s "${scriptdir}/*" "${bindir}"
+      else
+          echo "ln -s "${scriptdir}" "${bindir}""
+          ln -s "${scriptdir}" "${bindir}"
+      fi
+  fi # makebin
 fi
 
 ## Create symlink in the `versions` directory for backward compatibility
