@@ -553,8 +553,7 @@ for hook in "${before_hooks[@]}"; do eval "$hook"; done
 
 # Plan cleanup on unsuccessful installation.
 cleanup() {
-  [[ -L "${COMPAT_VIRTUALENV_PATH}" ]] && rm "${COMPAT_VIRTUALENV_PATH}"
-  [ -z "${PREFIX_EXISTS}" ] && rm -rf "$VIRTUALENV_PATH"
+   echo "cleanup" >&2
 }
 
 trap cleanup SIGINT ERR
