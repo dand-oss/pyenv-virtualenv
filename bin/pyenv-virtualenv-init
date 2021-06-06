@@ -9,8 +9,14 @@
 set -e
 [ -n "$PYENV_DEBUG" ] && set -x
 
+source "${PYENV_ROOT}/libexec/resubst"
+
+do_resolve_link() {
+   $(type -p greadlink readlink | head -1) "$1"
+}
+
 resolve_link() {
-  $(type -p greadlink readlink | head -1) "$1"
+    echo "$(resubst_unix "$(do_resolve_link "$1")")"
 }
 
 abs_dirname() {
