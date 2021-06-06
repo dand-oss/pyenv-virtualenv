@@ -22,8 +22,14 @@ if [ "$1" = "--complete" ]; then
   exec pyenv virtualenvs --bare
 fi
 
+source "${PYENV_ROOT}/libexec/resubst"
+
+do_resolve_link() {
+   $(type -p greadlink readlink | head -1) "$1"
+}
+
 resolve_link() {
-  $(type -p greadlink readlink | head -1) "$1"
+    echo "$(resubst_unix "$(do_resolve_link "$1")")"
 }
 
 usage() {
