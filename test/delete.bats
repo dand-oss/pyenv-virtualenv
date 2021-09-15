@@ -24,7 +24,7 @@ setup() {
 
 @test "delete virtualenv by symlink" {
   mkdir -p "${PYENV_ROOT}/versions/2.7.11/envs/venv27"
-  ln -fs "${PYENV_ROOT}/versions/2.7.11/envs/venv27" "${PYENV_ROOT}/versions/venv27"
+  ln -frs "${PYENV_ROOT}/versions/2.7.11/envs/venv27" "${PYENV_ROOT}/versions/venv27"
 
   stub pyenv-rehash "true"
 
@@ -40,7 +40,7 @@ setup() {
 
 @test "delete virtualenv with symlink" {
   mkdir -p "${PYENV_ROOT}/versions/2.7.11/envs/venv27"
-  ln -fs "${PYENV_ROOT}/versions/2.7.11/envs/venv27" "${PYENV_ROOT}/versions/venv27"
+  ln -frs "${PYENV_ROOT}/versions/2.7.11/envs/venv27" "${PYENV_ROOT}/versions/venv27"
 
   stub pyenv-rehash "true"
 
@@ -57,7 +57,7 @@ setup() {
 @test "not delete virtualenv with different symlink" {
   mkdir -p "${PYENV_ROOT}/versions/2.7.8/envs/venv27"
   mkdir -p "${PYENV_ROOT}/versions/2.7.11/envs/venv27"
-  ln -fs "${PYENV_ROOT}/versions/2.7.8/envs/venv27" "${PYENV_ROOT}/versions/venv27"
+  ln -frs "${PYENV_ROOT}/versions/2.7.8/envs/venv27" "${PYENV_ROOT}/versions/venv27"
 
   stub pyenv-rehash "true"
 
